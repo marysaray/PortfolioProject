@@ -1,3 +1,5 @@
+[![.NET](https://github.com/marysaray/PortfolioProject/actions/workflows/dotnet.yml/badge.svg)](https://github.com/marysaray/PortfolioProject/actions/workflows/dotnet.yml)
+
 # Portfolio Project
 
 This website can be use to invite others and have an organized plan for events such as Birthday, Graduation, Wedding, Baby Shower, etc…
