@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using PortfolioProject.Models;
 
 namespace PortfolioProject.Data
 {
@@ -9,5 +10,7 @@ namespace PortfolioProject.Data
             : base(options)
         {
         }
+
+        public DbSet<EventType> Categories { get; set; }
     }
 }
