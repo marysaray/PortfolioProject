@@ -12,5 +12,7 @@ namespace PortfolioProject.Data
         }
 
         public DbSet<EventType> Categories { get; set; }
+
+        public DbSet<Location> Locations { get; set; }
     }
 }
