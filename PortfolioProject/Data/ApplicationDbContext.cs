@@ -22,5 +22,7 @@ namespace PortfolioProject.Data
         public DbSet<Birthday> Birthdays { get; set; }
 
         public DbSet<CelebrationsAndCeremonies> CelebrationsAndCeremonies { get; set; }
+
+        public DbSet<Organization> Organizations { get; set; }
     }
 }
