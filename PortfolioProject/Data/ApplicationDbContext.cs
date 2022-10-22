@@ -20,5 +20,7 @@ namespace PortfolioProject.Data
         public DbSet<Holidays> Holidays { get; set; }
 
         public DbSet<Birthday> Birthdays { get; set; }
+
+        public DbSet<CelebrationsAndCeremonies> CelebrationsAndCeremonies { get; set; }
     }
 }
