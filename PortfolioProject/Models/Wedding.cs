@@ -1,5 +1,6 @@
 ﻿namespace PortfolioProject.Models
 {
+#nullable disable
     public class Wedding
     {
         public int Id { get; set; } 

@@ -4,6 +4,7 @@ using KeyAttribute = System.ComponentModel.DataAnnotations.KeyAttribute;
 
 namespace PortfolioProject.Models
 {
+#nullable disable
     public class Location
     {
         [Key]

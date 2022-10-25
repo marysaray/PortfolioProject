@@ -1,4 +1,6 @@
-﻿namespace PortfolioProject.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace PortfolioProject.Models
 {
 #nullable disable
     public class Holidays
