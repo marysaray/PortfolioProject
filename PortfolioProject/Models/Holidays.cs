@@ -5,6 +5,7 @@
     {
         public int Id { get; set; }
 
+        [Display(Name = "Holiday")]
         public string HolidayName { get; set; }
     }
 }
