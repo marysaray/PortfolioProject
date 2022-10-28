@@ -32,5 +32,7 @@ namespace PortfolioProject.Data
         public DbSet<GetTogether> Events { get; set; }
 
         public DbSet<ContactInfo> Contacts { get; set; }
+
+        public DbSet<EventForm> EventForms { get; set; }
     }
 }
