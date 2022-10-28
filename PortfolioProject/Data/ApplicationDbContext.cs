@@ -30,5 +30,7 @@ namespace PortfolioProject.Data
         public DbSet<Wedding> Love { get; set; }
 
         public DbSet<GetTogether> Events { get; set; }
+
+        public DbSet<ContactInfo> Contacts { get; set; }
     }
 }
