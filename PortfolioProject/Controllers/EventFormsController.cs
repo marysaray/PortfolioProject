@@ -48,7 +48,11 @@ namespace PortfolioProject.Controllers
         // GET: EventForms/Create
         public IActionResult Create()
         {
-            return View();
+            CreateEventViewModel viewModel = new();
+            viewModel.AllContacts = _context.Contacts.OrderBy(c => c.FirstName).ToList();
+            viewModel.AllCategories = _context.Categories.OrderBy(i => i.EventId).ToList();
+            viewModel.AllLocations = _context.Locations.OrderBy(l => l.LocationName).ToList();
+            return View(viewModel);
         }
 
         // POST: EventForms/Create
