@@ -2,6 +2,50 @@
 
 @{
     ViewData["Title"] = "Create";
+    // Create selected list 
+    List<SelectListItem> contactsSelectList = new();
+    List<SelectListItem> locationSelectList = new();
+    List<SelectListItem> categorySelectList = new();
+
+    // Get contacts
+    foreach (ContactInfo contacts in Model.AllContacts)
+    {
+        // Make a list of select items
+        contactsSelectList.Add
+        (
+            new SelectListItem()
+            { 
+                Value = contacts.FirstName
+            }
+        );
+    }
+
+    // Get locations
+    foreach (Location locations in Model.AllLocations)
+    {
+        // Make a list of select items
+        locationSelectList.Add
+        (
+            new SelectListItem()
+            {
+                Value = locations.LocationName
+            }
+        );
+    }
+
+    // Get category
+    foreach (EventType category in Model.AllCategories)
+    {
+        // Make a list of select items
+        categorySelectList.Add
+        (
+            new SelectListItem()
+            {
+                Value = category.EventId.ToString(),
+                Text = category.Category
+            }
+        );
+    }
 }
 
 <h1>Create</h1>
@@ -19,6 +63,33 @@
                 <label asp-for="EventTitle" class="control-label"></label>
                 <input asp-for="EventTitle" class="form-control" />
                 <span asp-validation-for="EventTitle" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <select asp-for="ChosenContact">
+                    @foreach(ContactInfo contact in Model.AllContacts)
+                    {
+                        <option value="@contact.Id">@contact.FirstName</option>
+                    }
+                </select>
+            </div>
+            <br />
+            <div class="form-group">
+                <select asp-for="ChosenLocation">
+                    @foreach(Location location in Model.AllLocations)
+                    {
+                        <option value="@location.LocationId">@location.LocationName</option>
+                    }
+                </select>
+            </div>
+            <br />
+            <div class="form-group">
+                <select asp-for="ChosenCategory">
+                    @foreach (EventType category in Model.AllCategories)
+                    {
+                        <option value="@category.EventId">@category.Category</option>
+                    }
+                </select>
             </div>
             <br />
             <div class="form-group">
