@@ -19,4 +19,22 @@ namespace PortfolioProject.Models
 
         public Location Location { get; set; }
     }
+
+    public class CreateEventViewModel
+    {
+        [Display(Name = "Event Title")]
+        public string EventTitle { get; set; }
+
+        public List<ContactInfo> AllContacts { get; set; }
+
+        public ContactInfo ChosenContact { get; set; }
+
+        public List<EventType> AllCategories { get; set; }
+
+        public EventType ChosenCategory { get; set; }
+
+        public List<Location> AllLocations { get; set; }
+
+        public Location ChosenLocation { get; set; }
+    }
 }
