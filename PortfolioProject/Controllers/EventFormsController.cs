@@ -64,7 +64,30 @@ namespace PortfolioProject.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(eventForm);
+                // map CreateEventViewModel into newEvent
+                EventForm newEvent = new()
+                {
+                    EventTitle = eventForm.EventTitle,
+                    EventBy = new ContactInfo()
+                    { 
+                        Id = eventForm.ChosenContact
+                    },
+                    Category = new EventType()
+                    { 
+                        EventId = eventForm.ChosenCategory
+                    },
+                    Location = new Location()
+                    { 
+                        LocationId = eventForm.ChosenLocation
+                    }
+                };
+
+                // The entity state has not changed from the existing models
+                _context.Entry(newEvent.EventBy).State = EntityState.Unchanged;
+                _context.Entry(newEvent.Category).State = EntityState.Unchanged;
+                _context.Entry(newEvent.Location).State = EntityState.Unchanged;
+
+                _context.Add(newEvent);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
