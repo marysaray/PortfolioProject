@@ -15,7 +15,8 @@
         (
             new SelectListItem()
             { 
-                Value = contacts.FirstName
+                Value = contacts.Id.ToString(),
+                Text = contacts.FirstName
             }
         );
     }
@@ -28,7 +29,8 @@
         (
             new SelectListItem()
             {
-                Value = locations.LocationName
+                Value = locations.LocationId.ToString(),
+                Text = locations.LocationName
             }
         );
     }

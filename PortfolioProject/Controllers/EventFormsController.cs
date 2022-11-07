@@ -60,7 +60,7 @@ namespace PortfolioProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,EventTitle")] EventForm eventForm)
+        public async Task<IActionResult> Create(CreateEventViewModel eventForm)
         {
             if (ModelState.IsValid)
             {
@@ -68,6 +68,9 @@ namespace PortfolioProject.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            eventForm.AllContacts = _context.Contacts.OrderBy(c => c.FirstName).ToList();
+            eventForm.AllLocations = _context.Locations.OrderBy(l => l.LocationName).ToList();
+            eventForm.AllCategories = _context.Categories.OrderBy(i => i.EventId).ToList();
             return View(eventForm);
         }
 
