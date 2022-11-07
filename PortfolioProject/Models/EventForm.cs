@@ -27,14 +27,14 @@ namespace PortfolioProject.Models
 
         public List<ContactInfo> AllContacts { get; set; }
 
-        public ContactInfo ChosenContact { get; set; }
+        public int ChosenContact { get; set; }
 
         public List<EventType> AllCategories { get; set; }
 
-        public EventType ChosenCategory { get; set; }
+        public int ChosenCategory { get; set; }
 
         public List<Location> AllLocations { get; set; }
 
-        public Location ChosenLocation { get; set; }
+        public int ChosenLocation { get; set; }
     }
 }
