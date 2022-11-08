@@ -17,7 +17,7 @@
             { 
                 Value = contacts.Id.ToString(),
                 Text = contacts.FirstName
-            }
+}
         );
     }
 
@@ -52,7 +52,7 @@
 
 <h1>Create</h1>
 
-<h4>Event Form</h4> 
+<h4>Event Form</h4>
 <a class="form-group btn btn-outline-primary" asp-area="" asp-controller="Contacts" asp-action="Create">Create Contact</a>
 <a class="form-group btn btn-outline-primary" asp-area="" asp-controller="Locations" asp-action="Create">Add Locations</a>
 <a class="form-group btn btn-outline-primary" asp-area="" asp-controller="EventTypes" asp-action="Create">Categories</a>
@@ -116,3 +116,8 @@
         </form>
     </div>
 </div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
