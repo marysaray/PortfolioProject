@@ -68,6 +68,9 @@ namespace PortfolioProject.Controllers
                 EventForm newEvent = new()
                 {
                     EventTitle = eventForm.EventTitle,
+                    Description = eventForm.Description,
+                    StartDateTime = eventForm.StartDateTime,
+                    EndDateTime = eventForm.EndDateTime,
                     EventBy = new ContactInfo()
                     { 
                         Id = eventForm.ChosenContact
