@@ -7,6 +7,11 @@
 <h1>Create</h1>
 
 <h4>Event Type</h4>
+<p>
+	<a class="btn btn-outline-warning" asp-action="Index">All Categories</a>
+    <a class="btn btn-outline-secondary" asp-controller="EventForms" asp-action="Create">Go to Event Form</a>
+	<a class="btn btn-outline-info" asp-controller="EventForms" asp-action="Index">Go to Event List</a>  
+</p>
 <hr />
 <div class="row">
     <div class="col-md-6">
@@ -19,14 +24,10 @@
             </div>
             <br />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-outline-success" />         
             </div>
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

@@ -48,7 +48,11 @@ namespace PortfolioProject.Controllers
         // GET: EventForms/Create
         public IActionResult Create()
         {
-            return View();
+            CreateEventViewModel viewModel = new();
+            viewModel.AllContacts = _context.Contacts.OrderBy(c => c.FirstName).ToList();
+            viewModel.AllCategories = _context.Categories.OrderBy(i => i.EventId).ToList();
+            viewModel.AllLocations = _context.Locations.OrderBy(l => l.LocationName).ToList();
+            return View(viewModel);
         }
 
         // POST: EventForms/Create
@@ -56,14 +60,43 @@ namespace PortfolioProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,EventTitle")] EventForm eventForm)
+        public async Task<IActionResult> Create(CreateEventViewModel eventForm)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(eventForm);
+                // map CreateEventViewModel into newEvent
+                EventForm newEvent = new()
+                {
+                    EventTitle = eventForm.EventTitle,
+                    Description = eventForm.Description,
+                    StartDateTime = eventForm.StartDateTime,
+                    EndDateTime = eventForm.EndDateTime,
+                    EventBy = new ContactInfo()
+                    { 
+                        Id = eventForm.ChosenContact
+                    },
+                    Category = new EventType()
+                    { 
+                        EventId = eventForm.ChosenCategory
+                    },
+                    Location = new Location()
+                    { 
+                        LocationId = eventForm.ChosenLocation
+                    }
+                };
+
+                // The entity state has not changed from the existing models
+                _context.Entry(newEvent.EventBy).State = EntityState.Unchanged;
+                _context.Entry(newEvent.Category).State = EntityState.Unchanged;
+                _context.Entry(newEvent.Location).State = EntityState.Unchanged;
+
+                _context.Add(newEvent);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            eventForm.AllContacts = _context.Contacts.OrderBy(c => c.FirstName).ToList();
+            eventForm.AllLocations = _context.Locations.OrderBy(l => l.LocationName).ToList();
+            eventForm.AllCategories = _context.Categories.OrderBy(i => i.EventId).ToList();
             return View(eventForm);
         }
 
