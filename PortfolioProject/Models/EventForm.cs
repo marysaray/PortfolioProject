@@ -10,8 +10,16 @@ namespace PortfolioProject.Models
         [Key]
         public int Id { get; set; }
 
-        [Display(Name ="Event Title")]
+        [Display(Name = "Event Title")]
         public string EventTitle { get; set; }
+
+        public string Description { get; set; }
+
+        [Display(Name = "Start Date Time")]
+        public DateTime StartDateTime { get; set; }
+
+        [Display(Name = "End Date Time")]
+        public DateTime EndDateTime { get; set; }
 
         public ContactInfo EventBy { get; set; }
 
@@ -24,6 +32,14 @@ namespace PortfolioProject.Models
     {
         [Display(Name = "Event Title")]
         public string EventTitle { get; set; }
+
+        public string Description { get; set; }
+
+        [Display(Name = "Start Date Time")]
+        public DateTime StartDateTime { get; set; }
+
+        [Display(Name = "End Date Time")]
+        public DateTime EndDateTime { get; set; }
 
         public List<ContactInfo> AllContacts { get; set; }
 
