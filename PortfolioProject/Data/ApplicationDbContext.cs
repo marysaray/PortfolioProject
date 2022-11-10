@@ -13,6 +13,10 @@ namespace PortfolioProject.Data
         {
         }
 
+        // Log every query to console
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+            => optionsBuilder.LogTo(Console.WriteLine);
+
         public DbSet<EventType> Categories { get; set; }
 
         public DbSet<Location> Locations { get; set; }
