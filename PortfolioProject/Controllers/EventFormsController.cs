@@ -21,30 +21,51 @@ namespace PortfolioProject.Controllers
             _context = context;
         }
 
-        // GET: EventForms
-        public async Task<IActionResult> Index(EventFormsIndexViewModel viewModel)
+        // GET: EventForms OFFSET & FETCH https://www.essentialsql.com/using-offset-and-fetch-with-the-order-by-clause/
+        public async Task<IActionResult> Index(EventFormsIndexViewModel eventFormsIndexViewModel, int? id)
         {
+            // Make list flexible
+            const int NumEventsToDisplayPerPage = 3;
+            // Offset to use current page to figure out # of events to skip
+            const int PageOffset = 1;
+            // Get current page 
+            /*
+                if (id.HasValue)
+                {
+                    currPage = id.Value;
+                }
+                else
+                {
+                    currPage = 1;
+                }
+            */
+            // int currPage = id.HasValue ? id.Value : 1;
+            int currPage = id ?? 1; // lightbulb --> coalesce expression: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/null-coalescing-operator
+            // Total number of events out of the database
+            int totalNumOfEvents = await _context.EventForms.CountAsync();
+            // Round events up for items to be displayed
+            double value = Math.Ceiling((double)totalNumOfEvents / NumEventsToDisplayPerPage);
+            int lastPage = Convert.ToInt32(value);
+
             List<EventFormsIndexViewModel> eventFormData =
-              await (from ef in _context.EventForms
-                     join categories in _context.Categories
-                       on ef.Id equals categories.EventId
-                     join contacts in _context.Contacts
-                       on ef.Id equals contacts.Id
-                     join locations in _context.Locations
-                       on ef.Id equals locations.LocationId
-                     orderby ef.Id
-                     select new EventFormsIndexViewModel
-                     {
-                         // map to model
-                         EventFormId = ef.Id,
-                         EventTitle = ef.EventTitle,
-                         Description = ef.Description,
-                         StartDateTime = ef.StartDateTime,
-                         EndDateTime = ef.EndDateTime,
-                         Category = ef.Category,
-                         EventBy = ef.EventBy,
-                         Location = ef.Location
-                     }).ToListAsync();
+                await (from ef in _context.EventForms
+                       orderby ef.Id descending
+                       select new EventFormsIndexViewModel
+                       {
+                           // map to model
+                           EventFormId = ef.Id,
+                           EventTitle = ef.EventTitle,
+                           Description = ef.Description,
+                           StartDateTime = ef.StartDateTime,
+                           EndDateTime = ef.EndDateTime,
+                           Category = ef.Category,
+                           EventBy = ef.EventBy,
+                           Location = ef.Location     
+                       })
+                       .Skip(NumEventsToDisplayPerPage * (currPage - PageOffset)) // skip 0 rows for the first page
+                       .Take(NumEventsToDisplayPerPage) // take how many associated with const value
+                       .ToListAsync();
+
             return View(eventFormData);
         }
 
@@ -57,12 +78,6 @@ namespace PortfolioProject.Controllers
             }
             var eventForm = await 
                 (from ef in _context.EventForms
-                 join categories in _context.Categories
-                   on ef.Id equals categories.EventId
-                 join contacts in _context.Contacts
-                   on ef.Id equals contacts.Id
-                 join locations in _context.Locations
-                   on ef.Id equals locations.LocationId
                  orderby ef.Id
                  select new EventForm
                  {
