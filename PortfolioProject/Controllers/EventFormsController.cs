@@ -55,14 +55,31 @@ namespace PortfolioProject.Controllers
             {
                 return NotFound();
             }
-
-            var eventForm = await _context.EventForms
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var eventForm = await 
+                (from ef in _context.EventForms
+                 join categories in _context.Categories
+                   on ef.Id equals categories.EventId
+                 join contacts in _context.Contacts
+                   on ef.Id equals contacts.Id
+                 join locations in _context.Locations
+                   on ef.Id equals locations.LocationId
+                 orderby ef.Id
+                 select new EventForm
+                 {
+                     // map to model
+                     Id = ef.Id,
+                     EventTitle = ef.EventTitle,
+                     Description = ef.Description,
+                     StartDateTime = ef.StartDateTime,
+                     EndDateTime = ef.EndDateTime,
+                     Category = ef.Category,
+                     EventBy = ef.EventBy,
+                     Location = ef.Location
+                 }).FirstOrDefaultAsync(m => m.Id == id);
             if (eventForm == null)
             {
                 return NotFound();
             }
-
             return View(eventForm);
         }
 
