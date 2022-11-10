@@ -22,7 +22,7 @@ namespace PortfolioProject.Controllers
         }
 
         // GET: EventForms OFFSET & FETCH https://www.essentialsql.com/using-offset-and-fetch-with-the-order-by-clause/
-        public async Task<IActionResult> Index(EventFormsIndexViewModel eventFormsIndexViewModel, int? id)
+        public async Task<IActionResult> Index(EventFormsIndexViewModel viewModel, int? id)
         {
             // Make list flexible
             const int NumEventsToDisplayPerPage = 3;
@@ -65,8 +65,8 @@ namespace PortfolioProject.Controllers
                        .Skip(NumEventsToDisplayPerPage * (currPage - PageOffset)) // skip 0 rows for the first page
                        .Take(NumEventsToDisplayPerPage) // take how many associated with const value
                        .ToListAsync();
-
-            return View(eventFormData);
+            PaginationEventIndexViewModel eventListPage = new(eventFormData, lastPage, currPage);
+            return View(eventListPage);
         }
 
         // GET: EventForms/Details/5
