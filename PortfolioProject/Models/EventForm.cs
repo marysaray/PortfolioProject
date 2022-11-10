@@ -53,4 +53,26 @@ namespace PortfolioProject.Models
 
         public int ChosenLocation { get; set; }
     }
+
+    public class EventFormsIndexViewModel
+    {
+        public int EventFormId { get; set; }
+
+        [Display(Name = "Event Title")]
+        public string EventTitle { get; set; }
+
+        public string Description { get; set; }
+
+        [Display(Name = "Start Date Time")]
+        public DateTime StartDateTime { get; set; }
+
+        [Display(Name = "End Date Time")]
+        public DateTime EndDateTime { get; set; }
+
+        public ContactInfo EventBy { get; set; }
+
+        public EventType Category { get; set; }
+
+        public Location Location { get; set; }
+    }
 }

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PortfolioProject.Models.EventForm>
+﻿@model IEnumerable<PortfolioProject.Models.EventFormsIndexViewModel>
 
 @{
     ViewData["Title"] = "Events";
@@ -15,6 +15,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.EventTitle)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category.Category)
+            </th>
             <th> 
                  @Html.DisplayNameFor(model => model.Description)
             </th>
@@ -24,6 +27,30 @@
             <th>
                   @Html.DisplayNameFor(model => model.EndDateTime)
             </th>
+            <th>
+                  @Html.DisplayNameFor(model => model.EventBy.FirstName)
+            </th>
+            <th>
+                  @Html.DisplayNameFor(model => model.EventBy.LastName)
+            </th>
+            <th>
+                  @Html.DisplayNameFor(model => model.EventBy.PhoneNumber)
+            </th>
+            <th>
+                  @Html.DisplayNameFor(model => model.Location.LocationName)
+            </th>
+            <th>
+                  @Html.DisplayNameFor(model => model.Location.StreetAddress)
+            </th>
+            <th>
+                  @Html.DisplayNameFor(model => model.Location.City)
+            </th>
+            <th>
+                  @Html.DisplayNameFor(model => model.Location.State)
+            </th>
+            <th>
+                  @Html.DisplayNameFor(model => model.Location.Zip)
+            </th>
         </tr>
     </thead>
     <tbody>
@@ -32,20 +59,47 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.EventTitle)
+            </td>           
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.Category)
             </td>
             <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.StartDateTime)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EndDateTime)
-                    </td>
-                    <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StartDateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndDateTime)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.EventBy.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventBy.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EventBy.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location.LocationName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location.StreetAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location.State)
+            <td>
+                @Html.DisplayFor(modelItem => item.Location.Zip)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.EventFormId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.EventFormId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.EventFormId">Delete</a>
             </td>
         </tr>
 }

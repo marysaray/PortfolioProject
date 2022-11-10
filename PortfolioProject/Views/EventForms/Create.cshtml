@@ -86,7 +86,7 @@
                 <select asp-for="ChosenContact">
                     @foreach(ContactInfo contact in Model.AllContacts)
                     {
-                        <option value="@contact.Id">@contact.FirstName</option>
+                        <option value="@contact.Id">@contact.FirstName @contact.LastName</option>
                     }
                 </select>
             </div>
@@ -120,4 +120,3 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-
