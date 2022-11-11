@@ -75,4 +75,30 @@ namespace PortfolioProject.Models
 
         public Location Location { get; set; }
     }
+
+    public class PaginationEventIndexViewModel
+    {
+        /// <summary>
+        /// This constructor is for the pagination model
+        /// </summary>
+        public PaginationEventIndexViewModel(List<EventFormsIndexViewModel> events, int lastPage, int currPage)
+        {
+            EventForms = events;
+            LastPage = lastPage;
+            CurrentPage = currPage;
+        }
+        public List<EventFormsIndexViewModel> EventForms { get; private set; }
+
+        /// <summary>
+        /// The last page of the events. 
+        /// Calculated by having a total number of
+        /// events divided by events per page
+        /// </summary>
+        public int LastPage { get; private set; }
+
+        /// <summary>
+        /// Current page the user is viewing
+        /// </summary>
+        public int CurrentPage { get; private set; }
+    }
 }

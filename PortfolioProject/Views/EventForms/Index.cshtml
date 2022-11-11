@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PortfolioProject.Models.EventFormsIndexViewModel>
+﻿@model PortfolioProject.Models.PaginationEventIndexViewModel
 
 @{
     ViewData["Title"] = "Events";
@@ -9,60 +9,64 @@
 <p>
     <a class="btn btn-primary" asp-controller="EventForms" asp-action="Create">Add New Event</a>
 </p>
-<table class="table">
+
+@if (Model.EventForms.Count > 0)
+{ 
+<table class="table table-striped table-hover">
     <thead>
-        <tr>
+			<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.EventForms[0].Category.Category)
+			</th>
             <th>
-                @Html.DisplayNameFor(model => model.EventTitle)
+                @Html.DisplayNameFor(model => model.EventForms[0].EventTitle)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Category.Category)
-            </th>
-            <th> 
-                 @Html.DisplayNameFor(model => model.Description)
+                @Html.DisplayNameFor(model => model.EventForms[0].Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StartDateTime)
+                @Html.DisplayNameFor(model => model.EventForms[0].StartDateTime)
             </th>
             <th>
-                  @Html.DisplayNameFor(model => model.EndDateTime)
+                @Html.DisplayNameFor(model => model.EventForms[0].EndDateTime)
             </th>
             <th>
-                  @Html.DisplayNameFor(model => model.EventBy.FirstName)
+                @Html.DisplayNameFor(model => model.EventForms[0].EventBy.FirstName)
             </th>
             <th>
-                  @Html.DisplayNameFor(model => model.EventBy.LastName)
+                @Html.DisplayNameFor(model => model.EventForms[0].EventBy.LastName)
             </th>
             <th>
-                  @Html.DisplayNameFor(model => model.EventBy.PhoneNumber)
+                @Html.DisplayNameFor(model => model.EventForms[0].EventBy.PhoneNumber)
             </th>
             <th>
-                  @Html.DisplayNameFor(model => model.Location.LocationName)
+                @Html.DisplayNameFor(model => model.EventForms[0].Location.LocationName)
             </th>
             <th>
-                  @Html.DisplayNameFor(model => model.Location.StreetAddress)
+                @Html.DisplayNameFor(model => model.EventForms[0].Location.StreetAddress)
             </th>
             <th>
-                  @Html.DisplayNameFor(model => model.Location.City)
+                @Html.DisplayNameFor(model => model.EventForms[0].Location.City)
             </th>
             <th>
-                  @Html.DisplayNameFor(model => model.Location.State)
+                @Html.DisplayNameFor(model => model.EventForms[0].Location.State)
             </th>
             <th>
-                  @Html.DisplayNameFor(model => model.Location.Zip)
+                @Html.DisplayNameFor(model => model.EventForms[0].Location.Zip)
             </th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model) 
+        @foreach (var item in Model.EventForms) 
         {
         <tr>
-            <td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Category.Category)
+			</td>
+			<td>
                 @Html.DisplayFor(modelItem => item.EventTitle)
             </td>           
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.Category)
-            </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
@@ -72,7 +76,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.EndDateTime)
             </td>
-
             <td>
                 @Html.DisplayFor(modelItem => item.EventBy.FirstName)
             </td>
@@ -102,6 +105,31 @@
                 <a asp-action="Delete" asp-route-id="@item.EventFormId">Delete</a>
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>
+}
+else
+{
+ <h2>There are no more events.</h2>
+}
+
+<nav aria-label="Event List Pages">
+    <ul class="pagination">
+    @for (int i = 1; i <= Model.LastPage; i++)
+    {
+        if (i == Model.CurrentPage)
+        {
+            <li class="page-item active">
+                <a class="page-link">@i</a>
+            </li>
+        }
+        else 
+        {
+            <li class="page-item">
+                <a class="page-link" asp-action="Index" asp-route-id="@i">@i</a>
+            </li>
+        }
+    }
+    </ul>
+</nav>
