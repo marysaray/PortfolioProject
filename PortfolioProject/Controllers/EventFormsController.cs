@@ -49,7 +49,7 @@ namespace PortfolioProject.Controllers
 
             List<EventFormsIndexViewModel> eventFormData =
                 await (from ef in _context.EventForms
-                       orderby ef.Id descending
+                       orderby ef.StartDateTime descending
                        select new EventFormsIndexViewModel
                        {
                            // map to model
