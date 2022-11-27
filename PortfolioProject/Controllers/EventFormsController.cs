@@ -15,10 +15,12 @@ namespace PortfolioProject.Controllers
     public class EventFormsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _environment;
 
-        public EventFormsController(ApplicationDbContext context)
+        public EventFormsController(ApplicationDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
 
         // GET: EventForms OFFSET & FETCH https://www.essentialsql.com/using-offset-and-fetch-with-the-order-by-clause/
