@@ -108,6 +108,16 @@
                     }
                 </select>
             </div>
+             <div class="form-group">
+                <label asp-for="PhotoTitle" class="control-label"></label>
+                <input asp-for="PhotoTitle" class="form-control" />
+                <span asp-validation-for="PhotoTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UploadImage" class="control-label"></label>
+                <input asp-for="UploadImage" class="form-control" />
+                <span asp-validation-for="UploadImage" class="text-danger"></span>
+            </div>
             <br />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-outline-success" />
