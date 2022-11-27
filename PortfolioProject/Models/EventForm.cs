@@ -26,6 +26,10 @@ namespace PortfolioProject.Models
         public EventType Category { get; set; }
 
         public Location Location { get; set; }
+
+        public string PhotoTitle { get; set; }
+
+        public string PhotoUrl { get; set; }
     }
 
     public class CreateEventViewModel
