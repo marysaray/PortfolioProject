@@ -152,7 +152,9 @@ namespace PortfolioProject.Controllers
                     Location = new Location()
                     { 
                         LocationId = eventForm.ChosenLocation
-                    }
+                    },
+                    PhotoTitle = eventForm.PhotoTitle,
+                    PhotoUrl = fileName
                 };
 
                 // The entity state has not changed from the existing models
