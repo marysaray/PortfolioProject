@@ -59,7 +59,7 @@
 <hr />
 <div class="row">
     <div class="col-md-6">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="EventTitle" class="control-label"></label>
@@ -107,6 +107,16 @@
                         <option value="@category.EventId">@category.Category</option>
                     }
                 </select>
+            </div>
+             <div class="form-group">
+                <label asp-for="PhotoTitle" class="control-label"></label>
+                <input asp-for="PhotoTitle" class="form-control" />
+                <span asp-validation-for="PhotoTitle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UploadImage" class="control-label"></label>
+                <input asp-for="UploadImage" class="form-control" />
+                <span asp-validation-for="UploadImage" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group">

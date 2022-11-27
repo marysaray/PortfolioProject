@@ -26,6 +26,10 @@ namespace PortfolioProject.Models
         public EventType Category { get; set; }
 
         public Location Location { get; set; }
+
+        public string PhotoTitle { get; set; }
+
+        public string PhotoUrl { get; set; }
     }
 
     public class CreateEventViewModel
@@ -52,10 +56,15 @@ namespace PortfolioProject.Models
         public List<Location> AllLocations { get; set; }
 
         public int ChosenLocation { get; set; }
+
+        public string PhotoTitle { get; set; }
+
+        public IFormFile UploadImage { get; set; }
     }
 
     public class EventFormsIndexViewModel
     {
+        [Display(Name ="Event Type")]
         public int EventFormId { get; set; }
 
         [Display(Name = "Event Title")]
@@ -74,6 +83,12 @@ namespace PortfolioProject.Models
         public EventType Category { get; set; }
 
         public Location Location { get; set; }
+
+        [Display(Name = "Caption")]
+        public string PhotoTitle { get; set; }
+
+        [Display(Name = "Photo")]
+        public string PhotoUrl { get; set; }
     }
 
     public class PaginationEventIndexViewModel

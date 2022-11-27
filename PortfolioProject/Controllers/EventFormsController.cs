@@ -15,10 +15,12 @@ namespace PortfolioProject.Controllers
     public class EventFormsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _environment;
 
-        public EventFormsController(ApplicationDbContext context)
+        public EventFormsController(ApplicationDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
 
         // GET: EventForms OFFSET & FETCH https://www.essentialsql.com/using-offset-and-fetch-with-the-order-by-clause/
@@ -55,6 +57,8 @@ namespace PortfolioProject.Controllers
                            // map to model
                            EventFormId = ef.Id,
                            EventTitle = ef.EventTitle,
+                           PhotoTitle = ef.PhotoTitle,
+                           PhotoUrl = ef.PhotoUrl,
                            Description = ef.Description,
                            StartDateTime = ef.StartDateTime,
                            EndDateTime = ef.EndDateTime,
@@ -115,6 +119,19 @@ namespace PortfolioProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateEventViewModel eventForm)
         {
+            // Create unique file name for uploading image.
+            string fileName = Guid.NewGuid().ToString();
+            fileName += fileName + Path.GetExtension(eventForm.UploadImage.FileName);
+
+            // Save file to file system.
+            string upoladPath = Path.Combine(_environment.WebRootPath, "images", fileName);
+
+            // Create permission [using] Keyword calls and dispose automatically.
+            using Stream fileStream = new FileStream(upoladPath, FileMode.Create);
+
+            // Copy file
+            await eventForm.UploadImage.CopyToAsync(fileStream);
+
             if (ModelState.IsValid)
             {
                 // map CreateEventViewModel into newEvent
@@ -135,7 +152,9 @@ namespace PortfolioProject.Controllers
                     Location = new Location()
                     { 
                         LocationId = eventForm.ChosenLocation
-                    }
+                    },
+                    PhotoTitle = eventForm.PhotoTitle,
+                    PhotoUrl = fileName
                 };
 
                 // The entity state has not changed from the existing models

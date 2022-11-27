@@ -18,6 +18,12 @@
 			<th>
 				@Html.DisplayNameFor(model => model.EventForms[0].Category.Category)
 			</th>
+            	<th>
+				@Html.DisplayNameFor(model => model.EventForms[0].PhotoTitle)
+			</th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EventForms[0].PhotoUrl)
+                </th>
             <th>
                 @Html.DisplayNameFor(model => model.EventForms[0].EventTitle)
             </th>
@@ -63,6 +69,12 @@
 			<td>
 				@Html.DisplayFor(modelItem => item.Category.Category)
 			</td>
+            	<td>
+				@Html.DisplayFor(modelItem => item.PhotoTitle)
+			</td>
+            <td>
+                <img height="200" src="images/@item.PhotoUrl" alt="@item.PhotoTitle">
+            </td>
 			<td>
                 @Html.DisplayFor(modelItem => item.EventTitle)
             </td>           
