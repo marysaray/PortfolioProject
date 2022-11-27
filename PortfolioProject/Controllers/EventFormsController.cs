@@ -117,6 +117,19 @@ namespace PortfolioProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateEventViewModel eventForm)
         {
+            // Create unique file name for uploading image.
+            string fileName = Guid.NewGuid().ToString();
+            fileName += fileName + Path.GetExtension(eventForm.UploadImage.FileName);
+
+            // Save file to file system.
+            string upoladPath = Path.Combine(_environment.WebRootPath, "images", fileName);
+
+            // Create permission [using] Keyword calls and dispose automatically.
+            using Stream fileStream = new FileStream(upoladPath, FileMode.Create);
+
+            // Copy file
+            await eventForm.UploadImage.CopyToAsync(fileStream);
+
             if (ModelState.IsValid)
             {
                 // map CreateEventViewModel into newEvent
