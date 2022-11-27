@@ -88,6 +88,8 @@ namespace PortfolioProject.Controllers
                      // map to model
                      Id = ef.Id,
                      EventTitle = ef.EventTitle,
+                     PhotoTitle = ef.PhotoTitle,
+                     PhotoUrl = ef.PhotoUrl,
                      Description = ef.Description,
                      StartDateTime = ef.StartDateTime,
                      EndDateTime = ef.EndDateTime,
