@@ -27,8 +27,10 @@ namespace PortfolioProject.Models
 
         public Location Location { get; set; }
 
+        [Display(Name = "Caption")]
         public string PhotoTitle { get; set; }
 
+        [Display(Name = "Photo")]
         public string PhotoUrl { get; set; }
     }
 
@@ -57,8 +59,10 @@ namespace PortfolioProject.Models
 
         public int ChosenLocation { get; set; }
 
+        [Display(Name = "Caption")]
         public string PhotoTitle { get; set; }
 
+        [Display(Name = "Photo")]
         public IFormFile UploadImage { get; set; }
     }
 
