@@ -38,5 +38,7 @@ namespace PortfolioProject.Data
         public DbSet<ContactInfo> Contacts { get; set; }
 
         public DbSet<EventForm> EventForms { get; set; }
+
+        public DbSet<GreetingType> GreetingTypes { get; set; }
     }
 }
