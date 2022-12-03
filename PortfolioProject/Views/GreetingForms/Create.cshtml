@@ -2,6 +2,22 @@
 
 @{
     ViewData["Title"] = "Create";
+
+    List<SelectListItem> greetingSelectList = new();
+
+    // Go through a loop to get list item
+    foreach (GreetingType greeting in Model.AllGreetings)
+    {
+        // Make a list of select items
+        greetingSelectList.Add
+        (
+            new SelectListItem()
+                    {
+                        Value = greeting.GreetingId.ToString(),
+                        Text = greeting.GreetingName
+                    }
+        );
+    }
 }
 
 <h1>Create</h1>
