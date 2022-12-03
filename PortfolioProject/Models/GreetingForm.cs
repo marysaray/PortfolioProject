@@ -9,5 +9,7 @@ namespace PortfolioProject.Models
         public int GreetingId { get; set; }
 
         public string Message { get; set; }
+        public GreetingType GreetingType { get; set; }
+    }
     }
 }
