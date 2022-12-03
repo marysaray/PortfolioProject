@@ -65,6 +65,19 @@ namespace PortfolioProject.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(GreetingCreateViewModel greeting)
         {
+            // Create unique file name for uploading images.
+            string fileName = Guid.NewGuid().ToString();
+            fileName += fileName + Path.GetExtension(greeting.UploadFile.FileName);
+
+            // Save file to file system
+            string uploadPath = Path.Combine(_environment.WebRootPath, "images", fileName);
+
+            // Create permission [using] keyword calls and dispose automatically.
+            using Stream fileStream = new FileStream(uploadPath, FileMode.Create);
+
+            // Copy file 
+            await greeting.UploadFile.CopyToAsync(fileStream);
+
             if (ModelState.IsValid)
             {
                 // Map greeting type
@@ -75,6 +88,7 @@ namespace PortfolioProject.Controllers
                         GreetingId = greeting.ChosenGreeting
                     },
                     Message = greeting.Message,
+                    PhotoUrl = fileName
                 };
 
                 // Mark greeting unmodified for EF functionality
