@@ -11,6 +11,8 @@ namespace PortfolioProject.Models
         public string Message { get; set; }
 
         public GreetingType GreetingType { get; set; }
+
+        public string PhotoUrl { get; set; }
     }
 
     public class GreetingCreateViewModel
@@ -20,5 +22,7 @@ namespace PortfolioProject.Models
         public int ChosenGreeting { get; set; }
 
         public string Message { get; set; }
+
+        public IFormFile UploadFile { get; set; }
     }
 }
