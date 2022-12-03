@@ -1,7 +1,23 @@
-﻿@model PortfolioProject.Models.GreetingForm
+﻿@model PortfolioProject.Models.GreetingCreateViewModel
 
 @{
     ViewData["Title"] = "Create";
+
+    List<SelectListItem> greetingSelectList = new();
+
+    // Go through a loop to get list item
+    foreach (GreetingType greeting in Model.AllGreetings)
+    {
+        // Make a list of select items
+        greetingSelectList.Add
+        (
+            new SelectListItem()
+                    {
+                        Value = greeting.GreetingId.ToString(),
+                        Text = greeting.GreetingName
+                    }
+        );
+    }
 }
 
 <h1>Create</h1>
@@ -12,6 +28,9 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <select asp-for="ChosenGreeting" asp-items="greetingSelectList"></select>
+            </div>
             <div class="form-group">
                 <label asp-for="Message" class="control-label"></label>
                 <input asp-for="Message" class="form-control" />

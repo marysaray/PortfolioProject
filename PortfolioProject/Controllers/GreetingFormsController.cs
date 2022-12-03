@@ -46,7 +46,14 @@ namespace PortfolioProject.Controllers
         // GET: GreetingForms/Create
         public IActionResult Create()
         {
-            return View();
+            // Pass in a list of Greeting Types to get right away
+            GreetingCreateViewModel viewModel = new GreetingCreateViewModel();
+
+            // Get all greetings from the database and sort by id
+            viewModel.AllGreetings = _context.GreetingTypes.OrderBy(g => g.GreetingId).ToList();
+
+            // pass in the view mdodel
+            return View(viewModel);
         }
 
         // POST: GreetingForms/Create
@@ -54,15 +61,30 @@ namespace PortfolioProject.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("GreetingId,Message")] GreetingForm greetingForm)
+        public async Task<IActionResult> Create(GreetingCreateViewModel greeting)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(greetingForm);
+                // Map greeting type
+                GreetingForm newGreeting = new()
+                {
+                    GreetingType = new GreetingType()
+                    {
+                        GreetingId = greeting.ChosenGreeting
+                    },
+                    Message = greeting.Message,
+                };
+
+                // Mark greeting unmodified for EF functionality
+                _context.Entry(newGreeting.GreetingType).State = EntityState.Unchanged;
+
+                _context.Add(newGreeting);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(greetingForm);
+            // Add greetings back into the view model
+            greeting.AllGreetings = _context.GreetingTypes.OrderBy(g => g.GreetingId).ToList().ToList();
+            return View(greeting);
         }
 
         // GET: GreetingForms/Edit/5
