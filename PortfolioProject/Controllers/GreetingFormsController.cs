@@ -46,7 +46,14 @@ namespace PortfolioProject.Controllers
         // GET: GreetingForms/Create
         public IActionResult Create()
         {
-            return View();
+            // Pass in a list of Greeting Types to get right away
+            GreetingCreateViewModel viewModel = new GreetingCreateViewModel();
+
+            // Get all greetings from the database and sort by id
+            viewModel.AllGreetings = _context.GreetingTypes.OrderBy(g => g.GreetingId).ToList();
+
+            // pass in the view mdodel
+            return View(viewModel);
         }
 
         // POST: GreetingForms/Create
