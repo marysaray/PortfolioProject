@@ -13,10 +13,12 @@ namespace PortfolioProject.Controllers
     public class GreetingFormsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly IWebHostEnvironment _environment;
 
-        public GreetingFormsController(ApplicationDbContext context)
+        public GreetingFormsController(ApplicationDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
+            _environment = environment;
         }
 
         // GET: GreetingForms
