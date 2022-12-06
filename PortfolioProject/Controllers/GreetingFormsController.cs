@@ -22,9 +22,20 @@ namespace PortfolioProject.Controllers
         }
 
         // GET: GreetingForms
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(GreetingIndexViewModel viewModel)
         {
-              return View(await _context.GreetingForms.ToListAsync());
+            List<GreetingIndexViewModel> greetingData =
+                await (from gd in _context.GreetingForms
+                       orderby gd.GreetingId descending
+                       select new GreetingIndexViewModel
+                       {
+                           GreetingId = gd.GreetingId,
+                           GreetingType = gd.GreetingType,
+                           Message = gd.Message,
+                           Photo = gd.PhotoUrl
+                       }).ToListAsync();
+
+            return View(greetingData);
         }
 
         // GET: GreetingForms/Details/5

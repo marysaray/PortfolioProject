@@ -1,4 +1,4 @@
-﻿@model IEnumerable<PortfolioProject.Models.GreetingForm>
+﻿@model IEnumerable<PortfolioProject.Models.GreetingIndexViewModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,23 +13,29 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.GreetingType)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Message)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PhotoUrl)
+                @Html.DisplayNameFor(model => model.Photo)
             </th>  
             <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
-        <tr>
+            <tr>
+                <td>
+                @Html.DisplayFor(modelItem => item.GreetingType.GreetingName)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Message)
             </td>
-                  <td>
-                    <img height="200" src="~/images/@item.PhotoUrl" alt="@item.Message">
-                </td>
+            <td>
+                <img height="200" src="~/images/@item.Photo" alt="@item.Message">
+            </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.GreetingId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.GreetingId">Details</a> |
