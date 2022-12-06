@@ -361,3 +361,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/PortfolioProject/Properties/ServiceDependencies/PortfolioProject20221201210013 - Zip Deploy/profile.arm.json
