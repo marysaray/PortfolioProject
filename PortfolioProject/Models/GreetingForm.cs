@@ -10,6 +10,7 @@ namespace PortfolioProject.Models
 
         public string Message { get; set; }
 
+        [Display(Name = "Greeting Type")]
         public GreetingType GreetingType { get; set; }
 
         public string PhotoUrl { get; set; }
@@ -24,5 +25,16 @@ namespace PortfolioProject.Models
         public string Message { get; set; }
 
         public IFormFile UploadFile { get; set; }
+    }
+
+    public class GreetingIndexViewModel
+    { 
+        public int GreetingId { get; set; }
+
+        [Display(Name = "Greeting Type")]
+        public GreetingType GreetingType { get; set; }
+        public string Message { get; set; }
+
+        public string Photo { get; set; }
     }
 }
