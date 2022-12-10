@@ -10,11 +10,16 @@ using PortfolioProject.Models;
 
 namespace PortfolioProject.Controllers
 {
+    /// <summary>
+    /// The controller for the greeting form page.
+    /// </summary>
     public class GreetingFormsController : Controller
     {
+        // field
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _environment;
 
+        // constructor injection: inject services
         public GreetingFormsController(ApplicationDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
@@ -22,6 +27,11 @@ namespace PortfolioProject.Controllers
         }
 
         // GET: GreetingForms
+        /// <summary>
+        /// Displays a view of all greetings.
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Index(GreetingIndexViewModel viewModel)
         {
             List<GreetingIndexViewModel> greetingData =
@@ -39,6 +49,11 @@ namespace PortfolioProject.Controllers
         }
 
         // GET: GreetingForms/Details/5
+        /// <summary>
+        /// Displays data associated to the specific greeting id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.GreetingForms == null)
@@ -57,6 +72,10 @@ namespace PortfolioProject.Controllers
         }
 
         // GET: GreetingForms/Create
+        /// <summary>
+        /// Create a new greeting form.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Create()
         {
             // Pass in a list of Greeting Types to get right away
@@ -72,6 +91,11 @@ namespace PortfolioProject.Controllers
         // POST: GreetingForms/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Add and save to database after validation.
+        /// </summary>
+        /// <param name="greeting"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(GreetingCreateViewModel greeting)
@@ -115,6 +139,11 @@ namespace PortfolioProject.Controllers
         }
 
         // GET: GreetingForms/Edit/5
+        /// <summary>
+        /// Edit a specific greeting.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.GreetingForms == null)
@@ -133,6 +162,12 @@ namespace PortfolioProject.Controllers
         // POST: GreetingForms/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Update and save greeting to database after validation.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="greetingForm"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("GreetingId,Message")] GreetingForm greetingForm)
@@ -166,6 +201,11 @@ namespace PortfolioProject.Controllers
         }
 
         // GET: GreetingForms/Delete/5
+        /// <summary>
+        /// Delete a specific greeting.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.GreetingForms == null)
@@ -184,6 +224,11 @@ namespace PortfolioProject.Controllers
         }
 
         // POST: GreetingForms/Delete/5
+        /// <summary>
+        /// Update database after greeting deletion.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -202,6 +247,11 @@ namespace PortfolioProject.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        /// <summary>
+        /// Validation if content exists.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool GreetingFormExists(int id)
         {
           return _context.GreetingForms.Any(e => e.GreetingId == id);

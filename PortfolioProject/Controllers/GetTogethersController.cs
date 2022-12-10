@@ -10,22 +10,36 @@ using PortfolioProject.Models;
 
 namespace PortfolioProject.Controllers
 {
+    /// <summary>
+    /// The controller for the get-together page.
+    /// </summary>
     public class GetTogethersController : Controller
     {
+        // field
         private readonly ApplicationDbContext _context;
 
+        // constructor injection: inject services
         public GetTogethersController(ApplicationDbContext context)
         {
             _context = context;
         }
 
         // GET: GetTogethers
+        /// <summary>
+        /// Displays a view of all get-togethers.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Index()
         {
               return View(await _context.Events.ToListAsync());
         }
 
         // GET: GetTogethers/Details/5
+        /// <summary>
+        /// Displays data associated to the specific id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Events == null)
@@ -44,6 +58,10 @@ namespace PortfolioProject.Controllers
         }
 
         // GET: GetTogethers/Create
+        /// <summary>
+        /// Create a new upload.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Create()
         {
             return View();
@@ -52,6 +70,11 @@ namespace PortfolioProject.Controllers
         // POST: GetTogethers/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Add and save to database after validation.
+        /// </summary>
+        /// <param name="getTogether"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,Place,Date")] GetTogether getTogether)
@@ -66,6 +89,11 @@ namespace PortfolioProject.Controllers
         }
 
         // GET: GetTogethers/Edit/5
+        /// <summary>
+        /// Edit a specific event.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Events == null)
@@ -84,6 +112,12 @@ namespace PortfolioProject.Controllers
         // POST: GetTogethers/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Update and save event to database after validation.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="getTogether"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Place,Date")] GetTogether getTogether)
@@ -117,6 +151,11 @@ namespace PortfolioProject.Controllers
         }
 
         // GET: GetTogethers/Delete/5
+        /// <summary>
+        /// Delete a specific event.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Events == null)
@@ -135,6 +174,11 @@ namespace PortfolioProject.Controllers
         }
 
         // POST: GetTogethers/Delete/5
+        /// <summary>
+        /// Update database after event deletion.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -153,6 +197,11 @@ namespace PortfolioProject.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        /// <summary>
+        /// Validation if content exists.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool GetTogetherExists(int id)
         {
           return _context.Events.Any(e => e.Id == id);

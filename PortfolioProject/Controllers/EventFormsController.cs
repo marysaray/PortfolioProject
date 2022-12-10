@@ -11,12 +11,17 @@ using PortfolioProject.Models;
 
 namespace PortfolioProject.Controllers
 {
+    /// <summary>
+    /// The controller for the event form page.
+    /// </summary>
     [Authorize]
     public class EventFormsController : Controller
     {
+        // field
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _environment;
 
+        // constructor injection: inject services
         public EventFormsController(ApplicationDbContext context, IWebHostEnvironment environment)
         {
             _context = context;
@@ -24,6 +29,12 @@ namespace PortfolioProject.Controllers
         }
 
         // GET: EventForms OFFSET & FETCH https://www.essentialsql.com/using-offset-and-fetch-with-the-order-by-clause/
+        /// <summary>
+        /// Displays a view of all events.
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Index(EventFormsIndexViewModel viewModel, int? id)
         {
             // Make list flexible
@@ -49,6 +60,7 @@ namespace PortfolioProject.Controllers
             double value = Math.Ceiling((double)totalNumOfEvents / NumEventsToDisplayPerPage);
             int lastPage = Convert.ToInt32(value);
 
+            // Populate one event data details.
             List<EventFormsIndexViewModel> eventFormData =
                 await (from ef in _context.EventForms
                        orderby ef.StartDateTime descending
@@ -74,12 +86,18 @@ namespace PortfolioProject.Controllers
         }
 
         // GET: EventForms/Details/5
+        /// <summary>
+        /// Displays data associated to the specific event id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.EventForms == null)
             {
                 return NotFound();
             }
+            // Populate the associated event id details.
             var eventForm = await 
                 (from ef in _context.EventForms
                  orderby ef.Id
@@ -105,8 +123,13 @@ namespace PortfolioProject.Controllers
         }
 
         // GET: EventForms/Create
+        /// <summary>
+        /// Create a new event form.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Create()
         {
+            // Populate list of all contacts, categories and locations.
             CreateEventViewModel viewModel = new();
             viewModel.AllContacts = _context.Contacts.OrderBy(c => c.FirstName).ToList();
             viewModel.AllCategories = _context.Categories.OrderBy(i => i.EventId).ToList();
@@ -117,6 +140,11 @@ namespace PortfolioProject.Controllers
         // POST: EventForms/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Add and save the event to database after validation.
+        /// </summary>
+        /// <param name="eventForm"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(CreateEventViewModel eventForm)
@@ -175,6 +203,11 @@ namespace PortfolioProject.Controllers
         }
 
         // GET: EventForms/Edit/5
+        /// <summary>
+        /// Edit a specific event.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.EventForms == null)
@@ -193,6 +226,12 @@ namespace PortfolioProject.Controllers
         // POST: EventForms/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Update and save event to database after validation.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="eventForm"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, EventForm eventForm)
@@ -226,6 +265,11 @@ namespace PortfolioProject.Controllers
         }
 
         // GET: EventForms/Delete/5
+        /// <summary>
+        /// Delete a specific event.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.EventForms == null)
@@ -244,6 +288,11 @@ namespace PortfolioProject.Controllers
         }
 
         // POST: EventForms/Delete/5
+        /// <summary>
+        /// Update database after event deletion.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -262,6 +311,11 @@ namespace PortfolioProject.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        /// <summary>
+        /// Validation if content exists.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool EventFormExists(int id)
         {
           return _context.EventForms.Any(e => e.Id == id);
