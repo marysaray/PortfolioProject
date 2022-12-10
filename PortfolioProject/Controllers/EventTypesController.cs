@@ -11,23 +11,37 @@ using PortfolioProject.Models;
 
 namespace PortfolioProject.Controllers
 {
+    /// <summary>
+    /// The controller for the event type page.
+    /// </summary>
     [Authorize]
     public class EventTypesController : Controller
     {
+        // field
         private readonly ApplicationDbContext _context;
 
+        // constructor injection: inject services
         public EventTypesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
         // GET: EventTypes
+        /// <summary>
+        /// Displays a view of all event types.
+        /// </summary>
+        /// <returns></returns>
         public async Task<IActionResult> Index()
         {
               return View(await _context.Categories.ToListAsync());
         }
 
         // GET: EventTypes/Details/5
+        /// <summary>
+        /// Displays data associated to the specific id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Categories == null)
@@ -46,6 +60,10 @@ namespace PortfolioProject.Controllers
         }
 
         // GET: EventTypes/Create
+        /// <summary>
+        /// Create a new event type.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Create()
         {
             return View();
@@ -54,6 +72,11 @@ namespace PortfolioProject.Controllers
         // POST: EventTypes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Add and save to database after validation.
+        /// </summary>
+        /// <param name="eventType"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("EventId,Category")] EventType eventType)
@@ -68,6 +91,11 @@ namespace PortfolioProject.Controllers
         }
 
         // GET: EventTypes/Edit/5
+        /// <summary>
+        /// Edit a specific event.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Categories == null)
@@ -86,6 +114,12 @@ namespace PortfolioProject.Controllers
         // POST: EventTypes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Update and save event type to database after validation.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="eventType"></param>
+        /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("EventId,Category")] EventType eventType)
@@ -119,6 +153,11 @@ namespace PortfolioProject.Controllers
         }
 
         // GET: EventTypes/Delete/5
+        /// <summary>
+        /// Delete a specific event type.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Categories == null)
@@ -137,6 +176,11 @@ namespace PortfolioProject.Controllers
         }
 
         // POST: EventTypes/Delete/5
+        /// <summary>
+        /// Update database after event type deletion.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -155,6 +199,11 @@ namespace PortfolioProject.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        /// <summary>
+        /// Validation if content exists.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private bool EventTypeExists(int id)
         {
           return _context.Categories.Any(e => e.EventId == id);
