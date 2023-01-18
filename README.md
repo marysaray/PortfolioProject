@@ -14,3 +14,9 @@ This website can be use to invite others and have an organized plan for events s
 Similar to the website https://www.evite.com as an inspiration for personal use.
 
 _*The End product will show images and videos from events for memories on the website._
+
+## Resources
+
+SendGrid API Documentation: https://github.com/sendgrid/sendgrid-csharp
+
+Safe storage of app secrets in development in ASP.NET Core: https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-6.0&tabs=windows
