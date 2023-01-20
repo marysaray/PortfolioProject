@@ -20,3 +20,5 @@ _*The End product will show images and videos from events for memories on the we
 SendGrid API Documentation: https://github.com/sendgrid/sendgrid-csharp
 
 Safe storage of app secrets in development in ASP.NET Core: https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-6.0&tabs=windows
+
+CConfiguration in ASP.NET Core: https://learn.microsoft.com/en-us/aspnet/core/fundamentals/configuration/?view=aspnetcore-6.0
