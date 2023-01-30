@@ -42,5 +42,7 @@ namespace PortfolioProject.Data
         public DbSet<GreetingType> GreetingTypes { get; set; }
 
         public DbSet<GreetingForm> GreetingForms { get; set; }
+
+        public DbSet<RSVPForm> RSVPForms { get; set; }
     }
 }
