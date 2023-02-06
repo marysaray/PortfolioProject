@@ -44,5 +44,7 @@ namespace PortfolioProject.Data
         public DbSet<GreetingForm> GreetingForms { get; set; }
 
         public DbSet<RSVPForm> RSVPForms { get; set; }
+
+        public DbSet<RSVPResponse> RSVPResponses {get; set;}
     }
 }
